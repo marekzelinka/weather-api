@@ -1,17 +1,12 @@
-import os
 import sys
 
 import httpx
-from dotenv import load_dotenv
 from fastapi import FastAPI
 
-load_dotenv()
-
-apiKey = os.getenv("OPENWEATHER_API_KEY")
-if apiKey is None:
-    raise ValueError("Missing env var: apiKey")
+from settings import Settings
 
 app = FastAPI()
+settings = Settings.model_validate({})
 
 
 @app.get("/")
@@ -25,7 +20,9 @@ async def root():
 @app.get("/weather/{city}")
 async def get_weather(city: str):
     r = httpx.get(
-        f"https://api.openweathermap.org/data/2.5/weather?q={city}&units=metric&appid={apiKey}"
+        f"https://api.openweathermap.org/data/2.5/weather?q={city}&units=metric&appid={
+            settings.openweather_api_key
+        }"
     )
     weather = r.json()
 

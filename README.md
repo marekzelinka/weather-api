@@ -26,7 +26,7 @@ uv sync
 Copy the values from `env.example` to a `.env.local` file:
 
 ```sh
-OPENWEATHER_API_KEY=your-api-key
+openweather_api_key=your-api-key
 ```
 
 #### OpenWeather API key
