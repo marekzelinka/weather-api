@@ -16,7 +16,10 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
-    return {"message": "Weather API with uv!", "python_version": sys.version}
+    return {
+        "message": "Weather API with uv and OpenWeather!",
+        "python_version": sys.version,
+    }
 
 
 @app.get("/weather/{city}")
